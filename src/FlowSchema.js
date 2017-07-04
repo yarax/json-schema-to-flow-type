@@ -129,16 +129,17 @@ export const convertSchema = (schema: Schema): FlowSchema => {
         if (_.isNil(mergedValue)) {
           return;
         }
-        if (key === '$required') {
+        if (key === 'required') {
           return _.uniq(mergedValue.concat(newValue)); // eslint-disable-line consistent-return
         }
-        if (_.isPlainObject(mergedValue)) {
-          if (!_.isPlainObject(newValue)) {
-            throw new Error(`Failed to merge "allOf" schemas because "${key}" has different values.`);
-          }
-          return;
-        }
-        assert.deepEqual(mergedValue, newValue, `Failed to merge "allOf" schemas because "${key}" has different values: ${JSON.stringify(mergedValue)} and ${JSON.stringify(newValue)}.`);
+        // if (_.isPlainObject(mergedValue)) {
+        //   if (!_.isPlainObject(newValue)) {
+        //     throw new Error(`Failed to merge "allOf" schemas because "${key}" has different values.`);
+        //   }
+        //   return;
+        // }
+        // assert.deepEqual(mergedValue, newValue, `Failed to merge "allOf" schemas because "${key}" has different values: ${JSON.stringify(mergedValue)} and ${JSON.stringify(newValue)}.`);
+
       })
     , _.omit(schema, ['allOf', '$ref']));
 
